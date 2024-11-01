@@ -1,0 +1,18 @@
+#coporationauth-wrapper {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.coporationauth-title {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.coporationauth-input-box {
+    margin-top: 40px;
+}

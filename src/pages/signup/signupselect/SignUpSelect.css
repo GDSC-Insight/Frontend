@@ -1,0 +1,30 @@
+#signup-select-warpper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-box {
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 300px;
+    height: 200px;
+    border-radius: 20px;
+    margin-right: 30px;
+    background-color: aqua;
+
+    font-size: 50px;
+    color: white;
+}
+
+.select-text {
+    font-size: 50px;
+    color: white;
+}
+
