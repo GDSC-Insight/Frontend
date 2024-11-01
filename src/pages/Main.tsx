@@ -1,43 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DonationCard from "../components/DonationCard";
-import { dummyData, DonationFormData } from "../data/dummyData"; // dummyData 가져오기
+import { dummyData, DonationFormData } from "../data/dummyData";
 import styled from "styled-components";
-import SwitchButton from "../components/SwitchButton";
 
 const Main = () => {
   const location = useLocation();
   const donationData = location.state?.donationData;
 
   const [donations, setDonations] = useState<DonationFormData[]>([]);
-  const [isRecruitingOnly, setIsRecruitingOnly] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
+  const [incomeBracket, setIncomeBracket] = useState<string>("");
 
   useEffect(() => {
     const filteredDonations = dummyData.filter((donation) => {
       const deadlineDate = new Date(donation.deadline);
-      return deadlineDate >= new Date(); // 마감 기한이 오늘 이후인 경우만 포함
+      return deadlineDate >= new Date();
     });
 
-    if (isRecruitingOnly) {
-      // 모집중인 것만 필터링
-      setDonations(
-        filteredDonations.filter((donation) => donation.isRecruiting)
-      );
-    } else {
-      setDonations(filteredDonations);
-    }
+    const incomeFilteredDonations = incomeBracket
+      ? filteredDonations.filter(
+          (donation) =>
+            parseInt(donation.incomeBracket) <= parseInt(incomeBracket)
+        )
+      : filteredDonations;
 
-    // 선택한 탭에 따라 추가 필터링
+    let finalFilteredDonations = incomeFilteredDonations;
     if (currentTab === 1) {
-      setDonations((prev) =>
-        prev.filter((donation) => donation.devType === "single-parent")
+      finalFilteredDonations = finalFilteredDonations.filter(
+        (donation) => donation.devType === "single-parent"
       );
     } else if (currentTab === 2) {
-      setDonations((prev) =>
-        prev.filter((donation) => donation.devType === "multi-child")
+      finalFilteredDonations = finalFilteredDonations.filter(
+        (donation) => donation.devType === "multi-child"
       );
     }
+
+    setDonations(finalFilteredDonations);
 
     if (donationData) {
       const donationDeadline = new Date(donationData.deadline);
@@ -45,43 +44,42 @@ const Main = () => {
         setDonations((prevDonations) => [...prevDonations, donationData]);
       }
     }
-  }, [donationData, isRecruitingOnly, currentTab]);
-
-  const toggleHandler = () => {
-    setIsRecruitingOnly(!isRecruitingOnly);
-  };
+  }, [donationData, currentTab, incomeBracket]);
 
   const activeMenuHandler = (idx: number) => {
-    // idx에 타입 추가
     setCurrentTab(idx);
+  };
+
+  const handleIncomeBracketChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setIncomeBracket(e.target.value);
   };
 
   const filteredTabs = ["전체", "한부모", "다자녀"];
 
   return (
     <div>
-      <Title>기부 공고 리스트(메인)</Title>
       <ConSortArea>
         <TabMenu>
-          {filteredTabs.map(
-            (
-              el,
-              idx: number // idx에 타입 추가
-            ) => (
-              <li
-                key={idx}
-                className={`${idx === currentTab ? "active" : ""}`}
-                onClick={() => activeMenuHandler(idx)}
-              >
-                {el}
-              </li>
-            )
-          )}
+          {filteredTabs.map((el, idx) => (
+            <li
+              key={idx}
+              className={`${idx === currentTab ? "active" : ""}`}
+              onClick={() => activeMenuHandler(idx)}
+            >
+              {el}
+            </li>
+          ))}
         </TabMenu>
-        <SwitchGroup>
-          <em>모집중만 보기</em>
-          <SwitchButton isOn={isRecruitingOnly} toggleHandler={toggleHandler} />
-        </SwitchGroup>
+        <IncomeBracketSelect onChange={handleIncomeBracketChange}>
+          <option value="">소득 분위 선택</option>
+          {Array.from({ length: 10 }, (_, i) => (
+            <option key={i} value={(i + 1).toString()}>
+              {i + 1}
+            </option>
+          ))}
+        </IncomeBracketSelect>
       </ConSortArea>
       {donations.length > 0 ? (
         <CardsContainer>
@@ -105,31 +103,24 @@ const Main = () => {
 
 export default Main;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  margin: 20px 0;
-  color: #333;
-  text-align: center;
-`;
-
 const ConSortArea = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  margin-bottom: 20px;
+  gap: 10px;
 `;
 
 const TabMenu = styled.ul`
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 10px;
 
   li {
     cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 25px;
     background: #f1f1f1;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s;
 
     &.active {
       background: #007bff;
@@ -142,20 +133,21 @@ const TabMenu = styled.ul`
   }
 `;
 
-const SwitchGroup = styled.div`
-  display: flex;
-  align-items: center;
+const IncomeBracketSelect = styled.select`
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
 `;
 
 const CardsContainer = styled.div`
   display: flex;
-  flex-wrap: wrap; /* 여러 줄로 배치 */
-  justify-content: center; /* 중앙 정렬 */
-  gap: 15px; /* 카드 사이의 간격 */
-  padding: 20px; /* 패딩 추가 */
-  background-color: #f8f9fa; /* 배경색 추가 */
-  border-radius: 8px; /* 둥근 모서리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const NoDonationsText = styled.p`

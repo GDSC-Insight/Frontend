@@ -1,15 +1,12 @@
 import styled from "styled-components";
-import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Header = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookies] = useCookies([
     "userToken",
     "corporationToken",
   ]);
-
   const navigator = useNavigate();
 
   const onlogoutButtonClickHandler = () => {
@@ -43,42 +40,28 @@ const Header = () => {
       <div className="header-title" onClick={onTitleClickHandler}>
         Myapp
       </div>
-      {!cookies.userToken && !cookies.corporationToken && (
-        <div className="clickbutton-box">
-          <div className="signin-button" onClick={onSingInButtonClickHnadler}>
-            <div>로그인</div>
-          </div>
-          <div className="signup-button" onClick={onSingUpButtonClickHnadler}>
-            <div>회원가입</div>
-          </div>
-        </div>
-      )}
-      {cookies.userToken && (
-        <div className="clickbutton-box">
-          <div
-            className="signin-button"
-            onClick={onUserMypageButtonClickHnadler}
-          >
-            <div>마이페이지</div>
-          </div>
-          <div className="signup-button" onClick={onlogoutButtonClickHandler}>
-            <div>로그아웃</div>
-          </div>
-        </div>
-      )}
-      {cookies.corporationToken && (
-        <div className="clickbutton-box">
-          <div
-            className="signin-button"
-            onClick={onCorporMypageButtonClickHnadler}
-          >
-            <div>마이페이지</div>
-          </div>
-          <div className="signup-button" onClick={onlogoutButtonClickHandler}>
-            <div>로그아웃</div>
-          </div>
-        </div>
-      )}
+      <ButtonContainer>
+        {!cookies.userToken && !cookies.corporationToken && (
+          <>
+            <Button onClick={onSingInButtonClickHnadler}>로그인</Button>
+            <Button onClick={onSingUpButtonClickHnadler}>회원가입</Button>
+          </>
+        )}
+        {cookies.userToken && (
+          <>
+            <Button onClick={onUserMypageButtonClickHnadler}>마이페이지</Button>
+            <Button onClick={onlogoutButtonClickHandler}>로그아웃</Button>
+          </>
+        )}
+        {cookies.corporationToken && (
+          <>
+            <Button onClick={onCorporMypageButtonClickHnadler}>
+              마이페이지
+            </Button>
+            <Button onClick={onlogoutButtonClickHandler}>로그아웃</Button>
+          </>
+        )}
+      </ButtonContainer>
     </StyledHeader>
   );
 };
@@ -86,11 +69,32 @@ const Header = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  background-color: orange;
-  color: var(--primary-foreground);
+  background-color: #ff4500; // Reddit orange
+  color: #ffffff;
   padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  top: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Button = styled.div`
+  background-color: #ffffff;
+  color: #ff4500;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
 `;

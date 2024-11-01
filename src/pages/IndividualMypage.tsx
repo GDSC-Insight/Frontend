@@ -15,7 +15,7 @@ const IndividualMypage = () => {
   );
 
   useEffect(() => {
-    // Retrieve the applied donations from local storage
+    // 로컬 스토리지에 저장
     const storedDonations = JSON.parse(
       localStorage.getItem("appliedDonations") || "[]"
     );
@@ -23,10 +23,8 @@ const IndividualMypage = () => {
   }, []);
 
   const handleDelete = (index: number) => {
-    // Create a new array excluding the deleted item
     const updatedDonations = appliedDonations.filter((_, i) => i !== index);
     setAppliedDonations(updatedDonations);
-    // Update local storage with the new array
     localStorage.setItem("appliedDonations", JSON.stringify(updatedDonations));
   };
 

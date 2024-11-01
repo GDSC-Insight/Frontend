@@ -1,24 +1,16 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "./pages/Main";
 
 import CorporationMypage from "./pages/CorporationMypage";
 import AuthSelect from "./pages/auth/authselect/AuthSelect";
 import CoporationAuth from "./pages/auth/coporationauth/CoporationAuth";
-import Header from "./layout/Header";
+
 import UserAuth from "./pages/auth/userauth/UserAuth";
 import SignUpSelect from "./pages/signup/signupselect/SignUpSelect";
 import UserSignUp from "./pages/signup/usersignup/UserSignUp";
 import CoporationSignUp from "./pages/signup/coporationsignup/CoporationSignUp";
 import IndividualMypage from "./pages/IndividualMypage";
-
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-    </>
-  );
-};
+import Layout from "./layout/Layout";
 
 const router = createBrowserRouter([
   {
