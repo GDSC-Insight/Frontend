@@ -1,8 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+function Main() {
+  return (
+    <div>
+      <h1>Main Page</h1>
+      <p>This is the main page.</p>
+    </div>
+  );
+}
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <h1>Main</h1>
-  </StrictMode>
-);
+export default Main;
