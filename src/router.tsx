@@ -33,14 +33,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/authselect",
-        element: <AuthSelect />,
-      },
-      {
-        path: "/corporationauth",
-        element: <CoporationAuth />,
-      },
-      {
-        path: "/authselect",
         element: <AuthSelect/>
       },
       {

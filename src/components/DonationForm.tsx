@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import FilterButton from "./filterbutton";
 
 interface FormData {
   title: string;
@@ -21,6 +22,11 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
   const [targetNum, setTargetNum] = useState(0);
   const [formValid, setFormValid] = useState(false);
 
+  
+  const [click1, setClick1] = useState<boolean>(false);
+  const [click2, setClick2] = useState<boolean>(false);
+  const [click3, setClick3] = useState<boolean>(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData: FormData = {
@@ -39,8 +45,38 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
     );
   };
 
+  const onClickFilterButtonHandler1 = () => {
+    if (click1 === true) {
+      setClick1(false)
+      return;
+    }
+    setClick1(true)
+}
+
+  const onClickFilterButtonHandler2 = () => {
+    if (click2 === true) {
+      setClick2(false)
+      return;
+    }
+    setClick2(true)
+}
+
+  const onClickFilterButtonHandler3 = () => {
+    if (click3 === true) {
+      setClick3(false)
+      return;
+    }
+    setClick3(true)
+}
+
+
   return (
     <form onSubmit={handleSubmit}>
+        <div style={{ display: 'flex' }}>
+  <FilterButton text="다자녀 가정" activite={click1} onClick={onClickFilterButtonHandler1}/>
+  <FilterButton text="한부모 가정" activite={click2} onClick={onClickFilterButtonHandler2}/>
+  <FilterButton text="소득분위 5등급이하" activite={click3} onClick={onClickFilterButtonHandler3}/>
+    </div>
       <InputBox>
         <Label htmlFor="title">게시글 제목</Label>
         <Input

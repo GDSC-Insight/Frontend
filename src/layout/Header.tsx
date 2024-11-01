@@ -5,13 +5,13 @@ import { useCookies } from "react-cookie";
 
 const Header = () => {
 
-  const [cookies, setCookie, removeCookies] = useCookies(['userToken','corporationToken']);
+  const [cookies, setCookie, removeCookies] = useCookies(['userToken','coporationToken']);
 
   const navigator = useNavigate();
 
   const onlogoutButtonClickHandler = () => {
     removeCookies('userToken');
-    removeCookies('corporationToken');
+    removeCookies('coporationToken');
     navigator('/')
   };
 
@@ -39,7 +39,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <div className="header-title" onClick={onTitleClickHandler}>Myapp</div>
-      {!cookies.userToken && !cookies.corporationToken && <div className="clickbutton-box">
+      {!cookies.userToken && !cookies.coporationToken && <div className="clickbutton-box">
         <div className="signin-button" onClick={onSingInButtonClickHnadler}>
           <div>로그인</div>
         </div>
@@ -55,7 +55,7 @@ const Header = () => {
           <div>로그아웃</div>
         </div>
       </div>}
-      {cookies.corporationToken && <div className="clickbutton-box">
+      {cookies.coporationToken && <div className="clickbutton-box">
         <div className="signin-button" onClick={onCorporMypageButtonClickHnadler}>
           <div>마이페이지</div>
         </div>
