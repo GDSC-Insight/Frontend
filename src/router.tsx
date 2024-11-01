@@ -9,6 +9,7 @@ import UserAuth from "./pages/auth/userauth/UserAuth";
 import SignUpSelect from "./pages/signup/signupselect/SignUpSelect";
 import UserSignUp from "./pages/signup/usersignup/UserSignUp";
 import CoporationSignUp from "./pages/signup/coporationsignup/CoporationSignUp";
+import IndividualMypage from "./pages/IndividualMypage";
 
 const Layout = () => {
   return (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/corporationauth",
         element: <CoporationAuth />,
+      },
+      {
+        path: "/IndiMypage",
+        element: <IndividualMypage />,
       },
     ],
   },

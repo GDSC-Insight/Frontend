@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './UserAuth.css'
 import InputBox from '../../../components/inputbox'
 import { useNavigate } from 'react-router-dom';
+import FilterButton from '../../../components/filterbutton';
 
 export default function UserAuth() {
 

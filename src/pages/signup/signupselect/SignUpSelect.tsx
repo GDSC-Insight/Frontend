@@ -7,7 +7,7 @@ export default function SignUpSelect() {
   const navigator = useNavigate(); 
 
   const onClickCoporation = () => {
-    navigator("/corporationsignup")
+    navigator("/coporationsignup")
   }
 
   const onClickUser = () => {

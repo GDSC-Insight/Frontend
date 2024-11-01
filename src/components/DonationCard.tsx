@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 interface DonationCardProps {
@@ -9,13 +8,38 @@ interface DonationCardProps {
   targetNum: number;
 }
 
-const DonationCard: React.FC<DonationCardProps> = ({
+const DonationCard = ({
   title,
   description,
   image,
   deadline,
   targetNum,
-}) => {
+}: DonationCardProps) => {
+  const handleApply = () => {
+    const appliedDonation = {
+      title,
+      description,
+      image,
+      deadline,
+      applyDate: new Date().toISOString(), // Record the date of application
+    };
+
+    // Retrieve existing applications from local storage
+    const existingApplications = JSON.parse(
+      localStorage.getItem("appliedDonations") || "[]"
+    );
+
+    // Add the new application
+    existingApplications.push(appliedDonation);
+
+    // Save back to local storage
+    localStorage.setItem(
+      "appliedDonations",
+      JSON.stringify(existingApplications)
+    );
+    alert("신청되었습니다."); // Optional: Notify user of success
+  };
+
   return (
     <CardContainer>
       <Image src={image} alt={title} />
@@ -26,7 +50,7 @@ const DonationCard: React.FC<DonationCardProps> = ({
         <Target>목표 인원: {targetNum}</Target>
       </Content>
       <ButtonContainer>
-        <ApplyButton>신청하기</ApplyButton>
+        <ApplyButton onClick={handleApply}>신청하기</ApplyButton>
       </ButtonContainer>
     </CardContainer>
   );
@@ -34,6 +58,7 @@ const DonationCard: React.FC<DonationCardProps> = ({
 
 export default DonationCard;
 
+// Styled components remain unchanged
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
