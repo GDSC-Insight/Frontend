@@ -1,15 +1,30 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import Main from "./pages/Main";
-import Auth from "./pages/Auth";
+import CorporationMypage from "./pages/CorporationMypage";
+import Header from "./layout/Header";
+
+const Layout = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Main />,
-  },
-  {
-    path: "/auth",
-    element: <Auth />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/CorporMypage",
+        element: <CorporationMypage />,
+      },
+      {
+        path: "/",
+        element: <Main />,
+      },
+    ],
   },
 ]);
 
