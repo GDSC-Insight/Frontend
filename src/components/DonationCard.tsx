@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -48,6 +49,7 @@ const DonationCard = ({
 
     alert("신청되었습니다.");
   };
+  const [cookies, setcookies] = useCookies("corporationToken");
 
   return (
     <CardContainer onClick={handleCardClick}>
@@ -59,7 +61,9 @@ const DonationCard = ({
         <Target>목표 인원: {targetNum}</Target>
       </Content>
       <ButtonContainer>
-        <ApplyButton onClick={handleApply}>신청하기</ApplyButton>
+        {!cookies.corporationToken && (
+          <ApplyButton onClick={handleApply}>신청하기</ApplyButton>
+        )}
       </ButtonContainer>
     </CardContainer>
   );
@@ -118,7 +122,7 @@ const ButtonContainer = styled.div`
 `;
 
 const ApplyButton = styled.button`
-  background-color: rgba(0, 191, 122, 0.4);
+  background-color: rgba(0, 191, 122, 0.7);
   color: white;
   border: none;
   border-radius: 4px;
