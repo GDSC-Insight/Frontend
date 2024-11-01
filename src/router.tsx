@@ -39,32 +39,33 @@ const router = createBrowserRouter([
         path: "/corporationauth",
         element: <CoporationAuth />,
       },
-    ],  
+      {
+        path: "/authselect",
+        element: <AuthSelect/>
+      },
+      {
+        path: "/corporationauth",
+        element: <CoporationAuth/>
+      },
+      {
+        path: "/userauth",
+        element: <UserAuth/>
+      },
+      {
+        path: "/signupselect",
+        element: <SignUpSelect/>
+      },
+      {
+        path: "/usersignup",
+        element: <UserSignUp/>
+      },
+      {
+        path: "/coporationsignup",
+        element: <CoporationSignUp/>
+      },
+    ],    
   },
-  {
-    path: "/authselect",
-    element: <AuthSelect/>
-  },
-  {
-    path: "/corporationauth",
-    element: <CoporationAuth/>
-  },
-  {
-    path: "/userauth",
-    element: <UserAuth/>
-  },
-  {
-    path: "/signupselect",
-    element: <SignUpSelect/>
-  },
-  {
-    path: "/usersignup",
-    element: <UserSignUp/>
-  },
-  {
-    path: "/coporationsignup",
-    element: <CoporationSignUp/>
-  },
+
 ]);
 
 export default router;
