@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   const onUserMypageButtonClickHnadler = () => {
-    navigator("/userMypage");
+    navigator("/IndiMypage");
   };
 
   const onCorporMypageButtonClickHnadler = () => {
