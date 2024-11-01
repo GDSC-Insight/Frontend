@@ -6,6 +6,7 @@ import CoporationAuth from "./pages/auth/coporationauth/CoporationAuth";
 import UserAuth from "./pages/auth/userauth/UserAuth";
 import SignUpSelect from "./pages/signup/signupselect/SignUpSelect";
 import UserSignUp from "./pages/signup/usersignup/UserSignUp";
+import CoporationSignUp from "./pages/signup/coporationsignup/CoporationSignUp";
 
 const router = createBrowserRouter([
    
@@ -39,8 +40,8 @@ const router = createBrowserRouter([
     element: <UserSignUp/>
   },
   {
-    path: "/corporationsignup",
-    element: <UserAuth/>
+    path: "/coporationsignup",
+    element: <CoporationSignUp/>
   },
 
 ]);

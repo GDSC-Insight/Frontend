@@ -1,0 +1,45 @@
+#filterButton-warpper {
+    cursor: pointer;
+    width: 56px;
+    height: 32px;
+    margin: 8px 5px;
+    user-select: none;
+}
+
+.filteroutLine-true {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--input-solid-color);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtertext-true {
+    width: 100%;
+    height: 50%;
+    font-size: 13px;
+    text-align: center;
+}
+
+.filteroutLine-false {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--main-button-color);
+    background-color: var(--main-button-color);
+    border-radius: 16px;
+
+    color: var(--main-button-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtertext-false {
+    width: 100%;
+    height: 50%;
+    font-size: 13px;
+    text-align: center;
+}

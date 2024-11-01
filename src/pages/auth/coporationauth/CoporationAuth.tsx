@@ -41,8 +41,10 @@ export default function CoporationAuth() {
             <InputBox value={id} onChange={onIdChangeHandler} message='' messageError type='text' label='아이디' placeholder='아이디를 입력해주세요.'/>
             <InputBox value={password} onChange={onPasswordChangeHandler} message={message} messageError type='password' label='비밀번호' placeholder='비밀번호를 입력해주세요.'/>
         </div>
+        <div className='coporationauth-button-box'>
         <button className='coporationauth-signin-button' onClick={onSignInButtonHandler}>로그인</button>
-        <button className='coporationauth-signip-button' onClick={onSignUpButtonHandler}>로그인</button>
+        <button className='coporationauth-signip-button' onClick={onSignUpButtonHandler}>회원가입</button>
+        </div>
     </div>
   )
 }
