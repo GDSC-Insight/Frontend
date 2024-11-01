@@ -32,10 +32,13 @@ export default function CoporationSignUp() {
   const [isSend, setSend] = useState<boolean>(false);
   const [isCheckedAuthNumber, setCheckedAuthNumber] = useState<boolean>(false);
 
+  const isComplete = name && id && isCheckedId && password && passwordCheck && isMatchedPassword && isCheckedPassword
+  && telNumber && isSend && authNumber && isCheckedAuthNumber;
+
   const navigator = useNavigate();
 
   const onSignUpButtonHandler = () => {
-    navigator("");
+    navigator("/corporationauth");
   };
 
   // event handler: 변경 이벤트 처리 //
@@ -200,9 +203,9 @@ export default function CoporationSignUp() {
         />
       </div>
       <div className="usersignup-button-box">
-        <button className="usersignup-button" onClick={onSignUpButtonHandler}>
-          회원가입 완료
-        </button>
+      <div className="button-container">
+                <div className={`button ${isComplete ? 'primary' : 'disable'} full-width`} onClick={onSignUpButtonHandler}>회원가입</div>
+            </div>
       </div>
     </div>
   );

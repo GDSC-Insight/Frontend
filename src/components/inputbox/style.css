@@ -1,3 +1,13 @@
+:root {
+    --primary-color: rgba(0, 191, 122, 1);
+    --primary-10-color: rgba(0, 191, 122, 0.1);
+    --primary-20-color: rgba(0, 191, 122, 0.2);
+    --error-color: rgba(255, 84, 64, 1);
+    --gray-color: rgba(138, 146, 166, 1);
+    --dark-gray-color: rgba(64, 64, 64, 1);
+    --default-color: rgba(35, 45, 66, 1);
+}
+
 .input-box {
     display: flex;
     flex-direction: column;

@@ -2,11 +2,17 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import InputBox from "../../../components/inputbox";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 export default function UserAuth() {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+
+  const [cookies, setCookie] = useCookies([
+    "userToken"
+  ]);
+
 
   const navigator = useNavigate();
 
@@ -22,6 +28,12 @@ export default function UserAuth() {
 
   const onSignInButtonHandler = () => {
     if (!id || !password) return;
+
+    if (id === 'zxcv1234' && password === 'zxcv1234'){
+      setCookie('userToken', 'userToken')
+      navigator('/')
+      return;
+    }
   };
 
   const onSignUpButtonHandler = () => {

@@ -2,11 +2,16 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import InputBox from "../../../components/inputbox";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 export default function CoporationAuth() {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+
+  const [cookies, setCookie] = useCookies([
+    "corporationToken"
+  ]);
 
   const navigator = useNavigate();
 
@@ -22,6 +27,12 @@ export default function CoporationAuth() {
 
   const onSignInButtonHandler = () => {
     if (!id || !password) return;
+
+    if (id === 'qwer1234' && password === 'qwer1234'){
+      setCookie('corporationToken', 'corporationToken')
+      navigator('/')
+      return;
+    }
   };
 
   const onSignUpButtonHandler = () => {

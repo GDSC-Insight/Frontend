@@ -1,0 +1,38 @@
+:root {
+    --primary-color: rgba(0, 191, 122, 1);
+    --primary-10-color: rgba(0, 191, 122, 0.1);
+    --primary-20-color: rgba(0, 191, 122, 0.2);
+    --error-color: rgba(255, 84, 64, 1);
+    --gray-color: rgba(138, 146, 166, 1);
+    --dark-gray-color: rgba(64, 64, 64, 1);
+    --default-color: rgba(35, 45, 66, 1);
+}
+
+.button {
+    border-radius: 6px;
+    padding: 8px 24px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+    text-align: center;
+
+    color: rgba(255, 255, 255, 1);
+}
+
+.button.disable {
+    background-color: var(--gray-color);
+}
+
+.button.primary {
+    background-color: var(--primary-color);
+}
+
+.full-width {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.message.error {
+    color: var(--error-color);
+}
