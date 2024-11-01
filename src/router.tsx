@@ -39,31 +39,31 @@ const router = createBrowserRouter([
         path: "/corporationauth",
         element: <CoporationAuth />,
       },
-    ],  
+    ],
   },
   {
     path: "/authselect",
-    element: <AuthSelect/>
+    element: <AuthSelect />,
   },
   {
     path: "/corporationauth",
-    element: <CoporationAuth/>
+    element: <CoporationAuth />,
   },
   {
     path: "/userauth",
-    element: <UserAuth/>
+    element: <UserAuth />,
   },
   {
     path: "/signupselect",
-    element: <SignUpSelect/>
+    element: <SignUpSelect />,
   },
   {
     path: "/usersignup",
-    element: <UserSignUp/>
+    element: <UserSignUp />,
   },
   {
     path: "/coporationsignup",
-    element: <CoporationSignUp/>
+    element: <CoporationSignUp />,
   },
 ]);
 

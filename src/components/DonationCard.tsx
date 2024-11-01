@@ -1,84 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const DonationCard = ({
-  title,
-  description,
-  image,
-  deadline,
-  targetNum,
-}: DonationCardProps) => {
-  return (
-    <Card>
-      <Image src={image} alt={title} />
-      <Content>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-      </Content>
-      <Footer>
-        <Deadline>마감일: {deadline}</Deadline>
-        <TargetNum>모집 인원 수: {targetNum}</TargetNum>
-      </Footer>
-    </Card>
-  );
-};
-
-export default DonationCard;
-
-const Card = styled.div`
-  border: 1px solid #eee;
-  border-radius: 6px;
-  padding: 0;
-  width: 300px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
-`;
-
-const Content = styled.div`
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
-
-const Title = styled.h3`
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-`;
-
-const Description = styled.p`
-  font-size: 14px;
-  margin: 8px 0;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background-color: #f9f9f9;
-`;
-
-const Deadline = styled.p`
-  font-size: 14px;
-  color: red;
-  margin: 0;
-`;
-
-const TargetNum = styled.p`
-  font-size: 14px;
-  margin: 0;
-`;
-
 interface DonationCardProps {
   title: string;
   description: string;
@@ -86,3 +8,88 @@ interface DonationCardProps {
   deadline: string;
   targetNum: number;
 }
+
+const DonationCard: React.FC<DonationCardProps> = ({
+  title,
+  description,
+  image,
+  deadline,
+  targetNum,
+}) => {
+  return (
+    <CardContainer>
+      <Image src={image} alt={title} />
+      <Content>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+        <Deadline>신청 마감일: {deadline}</Deadline>
+        <Target>목표 인원: {targetNum}</Target>
+      </Content>
+      <ButtonContainer>
+        <ApplyButton>신청하기</ApplyButton>
+      </ButtonContainer>
+    </CardContainer>
+  );
+};
+
+export default DonationCard;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+`;
+
+const Content = styled.div`
+  padding: 10px;
+`;
+
+const Title = styled.h3`
+  font-size: 1.2em;
+  margin: 0;
+`;
+
+const Description = styled.p`
+  font-size: 0.9em;
+  margin: 5px 0;
+`;
+
+const Deadline = styled.p`
+  font-size: 0.8em;
+  color: #666;
+`;
+
+const Target = styled.p`
+  font-size: 0.8em;
+  color: #666;
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+`;
+
+const ApplyButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
