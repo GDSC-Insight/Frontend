@@ -1,0 +1,82 @@
+:root {
+    --primary-color: rgba(0, 191, 122, 1);
+    --primary-10-color: rgba(0, 191, 122, 0.1);
+    --primary-20-color: rgba(0, 191, 122, 0.2);
+    --error-color: rgba(255, 84, 64, 1);
+    --gray-color: rgba(138, 146, 166, 1);
+    --dark-gray-color: rgba(64, 64, 64, 1);
+    --default-color: rgba(35, 45, 66, 1);
+}
+
+
+#userauth-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 750px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.userauth-title {
+
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+
+}
+
+.userauth-input-box {
+    width: 400px;
+
+}
+
+.usersignup-button {
+    width: 300px;
+    height: 40px;
+    background-color: var(--primary-10-color);
+    color: var(--primary-color);
+
+}
+
+.button-container {
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.button {
+    border-radius: 6px;
+    padding: 8px 24px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+    text-align: center;
+
+    color: rgba(255, 255, 255, 1);
+}
+
+.button.disable {
+    background-color: var(--gray-color);
+}
+
+.button.primary {
+    background-color: var(--primary-color);
+}
+
+.full-width {
+    width: 100%;
+    box-sizing: border-box;
+}

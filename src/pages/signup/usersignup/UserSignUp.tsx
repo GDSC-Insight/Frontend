@@ -17,6 +17,7 @@ export default function UserSignUp() {
     const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
     const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+    const [telNumberMessage, setTelNumberMessage] = useState<string>('');
 
     const [passwordCheckMessageError, setPasswordCheckMessageError] = useState<boolean>(false);
     const [idMessageError, setIdMessageError] = useState<boolean>(false);
@@ -30,13 +31,16 @@ export default function UserSignUp() {
     const [isCheckedAuthNumber, setCheckedAuthNumber] = useState<boolean>(false);
 
 
+    const isComplete = name && id && isCheckedId && password && passwordCheck && isMatchedPassword && isCheckedPassword
+    && telNumber && isSend && authNumber && isCheckedAuthNumber;
+
     const navigator = useNavigate();
 
 
 
 
     const onSignUpButtonHandler = () => {
-        navigator('')
+        navigator('/userauth')
     };
 
     // event handler: 변경 이벤트 처리 //
@@ -63,6 +67,14 @@ export default function UserSignUp() {
     const onTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setTelNumber(value);
+        
+        const pattern = /^(?=.*[0-9])$/;
+        const isMatched = pattern.test(value);
+
+        const message = (isMatched || !value) ? '' : '숫자만 입력해 주세요';
+        setPasswordMessage(message);
+        setPasswordMessageError(!isMatched);
+        setMatchedPassword(isMatched);
     };
 
     const onAuthAccountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -100,6 +112,15 @@ export default function UserSignUp() {
 
     const onAuthNumberCheckClickHandler = () => {
         if (!authNumber) return;
+
+        const pattern = /^[0-9]{11}$/;
+        const isMatched = pattern.test(telNumber);
+
+        if (!isMatched) {
+            setTelNumberMessage('숫자 11자 입력해주세요.');
+            setTelNumberMessageError(true);
+            return;
+        }
     }
     // effect: 비밀번호 및 비밀번호 확인 변경 시 실행할 함수 //
     useEffect(() => {
@@ -121,13 +142,15 @@ export default function UserSignUp() {
             <InputBox value={passwordCheck} onChange={onPasswordCheckChangeHandler} message={message} messageError={passwordMessageError} type='password' label='비밀번호 확인' placeholder='비밀번호를 한번더 입력해주세요.'/>
             <InputBox value={name} onChange={onNameChangeHandler} message={message} messageError type='text' label='이름' placeholder='이름을 입력해주세요.'/>
             <InputBox value={address} onChange={onAddressChangeHandler} message={message} messageError type='text' label='주소' placeholder='주소를 입력해주세요.'/>
-            <InputBox value={telNumber} onChange={onTelNumberChangeHandler} message={message} messageError type='text' label='휴대폰번호' placeholder='전화번호를 입력해주세요.' buttonName='인증하기'/>
+            <InputBox value={telNumber} onChange={onTelNumberChangeHandler} message={telNumberMessage} messageError={telNumberMessageError} type='text' label='휴대폰번호' placeholder='-를 빼고 입력해주세요.' buttonName='인증하기'/>
             {isSend && <InputBox messageError={authNumberMessageError} message={authNumberMessage} value={authNumber} label='인증번호' type='text' placeholder='인증번호 4자리를 입력해주세요.' buttonName='인증 확인' onChange={onAuthNumberChangeHandler} onButtonClick={onAuthNumberCheckClickHandler} /> }
             <InputBox value={authAccount} onChange={onAuthAccountChangeHandler} message={message} messageError type='text' label='계좌번호 인증' placeholder='비밀번호를 입력해주세요.' buttonName='인증하기'/>
         </div>
-        <div className='usersignup-button-box'>
-        <button className='usersignup-button' onClick={onSignUpButtonHandler}>회원가입 완료</button>
-        </div>
+        <div className="usersignup-button-box">
+      <div className="button-container">
+                <div className={`button ${isComplete ? 'primary' : 'disable'} full-width`} onClick={onSignUpButtonHandler}>회원가입</div>
+            </div>
+      </div>
     </div>
   )
 }

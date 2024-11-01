@@ -20,9 +20,18 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
   const [deadline, setDeadline] = useState("");
   const [targetNum, setTargetNum] = useState(0);
   const [formValid, setFormValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const today = new Date().toISOString().split("T")[0];
+
+    if (deadline < today) {
+      setErrorMessage("마감일은 현재 날짜 이후로 설정해야 합니다.");
+      return;
+    }
+
     const formData: FormData = {
       title,
       description,
@@ -37,7 +46,10 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
     setFormValid(
       !!title && !!description && !!image && !!deadline && !!targetNum
     );
+    setErrorMessage("");
   };
+
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <form onSubmit={handleSubmit}>
@@ -91,6 +103,7 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
         <Input
           id="deadline"
           type="date"
+          min={today}
           value={deadline}
           onChange={(e) => {
             setDeadline(e.target.value);
@@ -118,7 +131,8 @@ const DonationForm = ({ onSubmit }: DonationFormProps) => {
       <Button type="submit" active={formValid}>
         제출
       </Button>
-      {!formValid && <Message>모든 필드를 채워주세요.</Message>}
+
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </form>
   );
 };
@@ -178,9 +192,9 @@ const Button = styled.button<{ active: boolean }>`
   }
 `;
 
-const Message = styled.p`
-  margin-top: -4px;
-  height: 16px;
+const ErrorMessage = styled.p`
+  margin-top: 8px;
+  color: red;
   font-size: 13px;
   font-weight: 400;
 `;

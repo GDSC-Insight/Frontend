@@ -6,7 +6,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
+const Modal = ({ onClose, children }: ModalProps) => {
   return (
     <Overlay>
       <ModalContent>
