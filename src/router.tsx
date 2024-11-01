@@ -1,9 +1,10 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Main from "./pages/Main";
-import Header from "./layout/Header";
+
 import CorporationMypage from "./pages/CorporationMypage";
 import AuthSelect from "./pages/auth/authselect/AuthSelect";
 import CoporationAuth from "./pages/auth/coporationauth/CoporationAuth";
+import Header from "./layout/Header";
 
 const Layout = () => {
   return (
@@ -19,22 +20,22 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/CorporMypage",
-        element: <CorporationMypage />,
-      },
-      {
         path: "/",
         element: <Main />,
       },
+      {
+        path: "/corporMypage",
+        element: <CorporationMypage />,
+      },
+      {
+        path: "/authselect",
+        element: <AuthSelect />,
+      },
+      {
+        path: "/corporationauth",
+        element: <CoporationAuth />,
+      },
     ],
-  },
-  {
-    path: "/authselect",
-    element: <AuthSelect />,
-  },
-  {
-    path: "/corporationauth",
-    element: <CoporationAuth />,
   },
 ]);
 
