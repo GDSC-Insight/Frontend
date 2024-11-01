@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "./pages/Main";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +8,8 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: "/about",
-    element: <About />,
+    path: "/auth",
+    element: <Auth />,
   },
 ]);
 
