@@ -1,3 +1,5 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface DonationCardProps {
@@ -15,33 +17,40 @@ const DonationCard = ({
   deadline,
   targetNum,
 }: DonationCardProps) => {
-  const handleApply = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/donation-detail", {
+      state: { title, description, image, deadline, targetNum },
+    });
+  };
+
+  const handleApply = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent navigation when clicking "신청하기"
+
     const appliedDonation = {
       title,
       description,
       image,
       deadline,
-      applyDate: new Date().toISOString(), // Record the date of application
+      applyDate: new Date().toISOString(),
     };
 
-    // Retrieve existing applications from local storage
     const existingApplications = JSON.parse(
       localStorage.getItem("appliedDonations") || "[]"
     );
 
-    // Add the new application
     existingApplications.push(appliedDonation);
-
-    // Save back to local storage
     localStorage.setItem(
       "appliedDonations",
       JSON.stringify(existingApplications)
     );
-    alert("신청되었습니다."); // Optional: Notify user of success
+
+    alert("신청되었습니다.");
   };
 
   return (
-    <CardContainer>
+    <CardContainer onClick={handleCardClick}>
       <Image src={image} alt={title} />
       <Content>
         <Title>{title}</Title>
@@ -58,60 +67,63 @@ const DonationCard = ({
 
 export default DonationCard;
 
-// Styled components remain unchanged
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 200px;
+  width: 300px; /* Increased width from 200px to 300px */
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 120px;
+  height: 180px; /* Increased height from 120px to 180px */
   object-fit: cover;
 `;
 
 const Content = styled.div`
-  padding: 10px;
+  padding: 15px; /* Increased padding for more space */
 `;
 
 const Title = styled.h3`
-  font-size: 1.2em;
+  font-size: 1.8em; /* Increased font size */
   margin: 0;
 `;
 
 const Description = styled.p`
-  font-size: 0.9em;
+  font-size: 1.2em; /* Increased font size */
   margin: 5px 0;
+  overflow: hidden; /* Hide overflow */
+  white-space: nowrap; /* Prevent line breaks */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
 `;
 
 const Deadline = styled.p`
-  font-size: 0.8em;
+  font-size: 1em; /* Increased font size */
   color: #666;
 `;
 
 const Target = styled.p`
-  font-size: 0.8em;
+  font-size: 1em; /* Increased font size */
   color: #666;
 `;
 
 const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 15px; /* Adjusted for increased size */
+  right: 15px; /* Adjusted for increased size */
 `;
 
 const ApplyButton = styled.button`
-  background-color: #007bff;
+  background-color: rgba(0, 191, 122, 0.4);
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 0.9em;
+  padding: 8px 12px; /* Increased padding for button */
+  font-size: 1em; /* Increased font size */
   cursor: pointer;
 
   &:hover {

@@ -122,7 +122,8 @@ export const dummyData: DonationFormData[] = [
   },
   {
     title: "기부 12",
-    description: "열두 번째 기부 공고입니다.",
+    description:
+      "열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.열두 번째 기부 공고입니다.",
     image: "https://via.placeholder.com/150",
     deadline: "2024-11-29",
     targetNum: 80,

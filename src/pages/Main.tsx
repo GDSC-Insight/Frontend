@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DonationCard from "../components/DonationCard";
-import { dummyData, DonationFormData } from "../data/dummyData";
+import { dummyData, DonationFormData } from "../data/dummyData"; // dummyData 가져오기
 import styled from "styled-components";
 
 const Main = () => {
@@ -10,14 +10,15 @@ const Main = () => {
 
   const [donations, setDonations] = useState<DonationFormData[]>([]);
   const [currentTab, setCurrentTab] = useState(0);
-  const [incomeBracket, setIncomeBracket] = useState<string>("");
+  const [incomeBracket, setIncomeBracket] = useState<string>(""); // 소득 분위 상태 추가
 
   useEffect(() => {
     const filteredDonations = dummyData.filter((donation) => {
       const deadlineDate = new Date(donation.deadline);
-      return deadlineDate >= new Date();
+      return deadlineDate >= new Date(); // 마감 기한이 오늘 이후인 경우만 포함
     });
 
+    // 소득 분위 필터링
     const incomeFilteredDonations = incomeBracket
       ? filteredDonations.filter(
           (donation) =>
@@ -25,6 +26,7 @@ const Main = () => {
         )
       : filteredDonations;
 
+    // 선택한 탭에 따라 추가 필터링
     let finalFilteredDonations = incomeFilteredDonations;
     if (currentTab === 1) {
       finalFilteredDonations = finalFilteredDonations.filter(
@@ -44,7 +46,7 @@ const Main = () => {
         setDonations((prevDonations) => [...prevDonations, donationData]);
       }
     }
-  }, [donationData, currentTab, incomeBracket]);
+  }, [donationData, currentTab, incomeBracket]); // incomeBracket 추가
 
   const activeMenuHandler = (idx: number) => {
     setCurrentTab(idx);
@@ -72,6 +74,7 @@ const Main = () => {
             </li>
           ))}
         </TabMenu>
+        {/* 소득 분위 드롭다운 추가 */}
         <IncomeBracketSelect onChange={handleIncomeBracketChange}>
           <option value="">소득 분위 선택</option>
           {Array.from({ length: 10 }, (_, i) => (
@@ -145,9 +148,9 @@ const CardsContainer = styled.div`
   justify-content: center;
   gap: 15px;
   padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa; /* 배경색 추가 */
+  border-radius: 8px; /* 둥근 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 `;
 
 const NoDonationsText = styled.p`

@@ -11,6 +11,7 @@ import UserSignUp from "./pages/signup/usersignup/UserSignUp";
 import CoporationSignUp from "./pages/signup/coporationsignup/CoporationSignUp";
 import IndividualMypage from "./pages/IndividualMypage";
 import Layout from "./layout/Layout";
+import DonationDetail from "./pages/DonationDetail";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/IndiMypage",
         element: <IndividualMypage />,
+      },
+      {
+        path: "/donation-detail",
+        element: <DonationDetail />, // Add the new route for the detail page
       },
     ],
   },
